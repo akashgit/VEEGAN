@@ -35,7 +35,7 @@ $$-\int p_0(z) \log p_\theta(z) \leq O(\gamma, \theta)$$
 
 $$O(\gamma, \theta) = KL{q_\gamma(x|z) p_0(z)}{p_\theta(z|x)p(x)} - E[\log p_0(z)] + E[d(z, F_\theta(x))]$$
 
-where all expectations are taken with respect to the joint distribution $$p_0(z)q_\gamma(x|z)$$. 
+where all expectations are taken with respect to the joint distribution $$p_0(z)q_\gamma(x \mid z)$$. 
 
 TODO: finish this section.
 
