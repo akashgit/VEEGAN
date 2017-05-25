@@ -27,4 +27,4 @@ Deep generative models provide powerful tools for distributions over complicated
 ![inf](inference_paper.png)
 
 # Acknowledgement
-
+We thank Martin Arjovsky, Nicolas Collignon, Luke Metz, Casper Kaae Sønderby, Lucas Theis, Soumith Chintala, Stanisław Jastrz˛ebski, Harrison Edwards and Amos Storkey for their helpful comments. We would like to specially thank Ferenc Huszár for insightful discussions and feedback.
