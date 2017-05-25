@@ -11,5 +11,20 @@ Deep generative models provide powerful tools for distributions over complicated
 
 # Experiments
 
+## Synthetic Dataset
+![kde](2d_kde.png)
+
+## Stacked MNIST
+![sm](veegan_sm.png)
+
+## CIFAR
+![cifar](cifar_paper.png)
+
+## CelebA
+![faces](faces.png)
+
+## Inference
+![inf](inference_paper.png)
+
 # Acknowledgement
 
