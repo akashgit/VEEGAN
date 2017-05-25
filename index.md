@@ -10,7 +10,7 @@ Deep generative models provide powerful tools for distributions over complicated
 # Method
 
 # Experiments
-
+![results](tab.png) 
 ## Synthetic Dataset
 ![kde](2d_kde.png)
 
