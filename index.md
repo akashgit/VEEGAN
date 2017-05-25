@@ -35,7 +35,7 @@ $$-\int p_0(z) \log p_\theta(z) \leq O(\gamma, \theta)$$
 
 $$O(\gamma, \theta) = KL{q_\gamma(x|z) p_0(z)}{p_\theta(z|x)p(x)} - E[\log p_0(z)] + E[d(z, F_\theta(x))]$$
 
-where all expectations are taken with respect to the joint distribution $$p_0(z)q_\gamma(x \mid z)$$. 
+where all expectations are taken with respect to the joint distribution $$p_0(z) q_\gamma(x \mid z).$$ The second term does not depend on $$\gamma$$ or $$\theta$$, and is thus a constant, because $$p_0(z)$$ does neither depends on them nor on $$x$$. The function $$d$$ denotes a loss function in representation space $$R^K$$, such as $$l_2$$ loss. The third  term is then an autoencoder in representation space.
 
 TODO: finish this section.
 
