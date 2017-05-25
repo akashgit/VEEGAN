@@ -10,7 +10,7 @@ Deep generative models provide powerful tools for distributions over complicated
 # Learning In Implicit Models
 Deep generative models that do not induce a density function that can be tractably computed, but rather provide a simulation procedure to generate new data points are called implicit statistical models. Generative adversarial networks (GANs) are an attractive such method, which have seen promising recent successes. GANs train two deep networks in concert: a generator network that maps random noise, usually drawn from a multi-variate Gaussian, to data items; and a discriminator network that estimates the likelihood ratio of the generator network to the data distribution, and is trained using an adversarial principle
 
-More formally, let $$\{x_i\}_{i=1}^N$$.
+More formally, let $$\{x_i\}_{i=1}^N$$
 
 # Mode Collapsing Issue in GANs
 Despite an enormous amount of recent work, GANs are notoriously fickle to train, and it has been observed that they often suffer from mode collapse, in which the generator network learns how to generate samples from a few modes of the data distribution but misses many other modes, even though samples from the missing modes occur throughout the training data.
