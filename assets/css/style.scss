@@ -1,0 +1,10 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+.roundedBorder {
+border: 2px solid yellowgreen;
+border-radius: 20px;
+padding: 10px;
+}
