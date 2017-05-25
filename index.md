@@ -3,8 +3,6 @@ layout: default
 title: VEEGAN
 ---
 
-# Abstract
-Deep generative models provide powerful tools for distributions over complicated manifolds, such as those of natural images. But many of these methods, including generative adversarial networks (GANs), can be difficult to train, in part because they are prone to mode collapse, which means that they characterize only a few modes of the true distribution. To address this, we introduce VEEGAN, which features a reconstructor network, reversing the action of the generator by mapping from data to noise. Our training objective retains the original asymptotic consistency guarantee of GANs, and can be interpreted as a novel autoencoder loss over the noise. In sharp contrast to a traditional autoencoder over data points, VEEGAN does not require specifying a loss function over the data, but rather only over the representations, which are standard normal by assumption. On an extensive set of synthetic and real world image datasets, VEEGAN indeed resists mode collapsing to a far greater extent than other recent GAN variants, and produces more realistic samples.
 ![rationale](main.png)
 
 # Learning In Implicit Models
@@ -31,7 +29,17 @@ To address this issue, we introduce VEEGAN, a variational principle for estimati
 The main idea of VEEGAN is to introduce a second network $$F_\theta$$ which we call the __reconstructor__, which learns the reverse feature mapping from data items $$x$$ to representations $$z$$. To understand why this might prevent mode collapse, consider the example in Figure 1. In both columns of the figure, the middle vertical panel represents the data space, where in this example the true distribution $$p(x)$$ is a mixture of two Gaussians. The bottom panel depicts the input to the generator, which is drawn from a standard normal distribution, and depicts the action of the generator network $$G_\gamma$$. In this example, the generator has captured only one of the two modes of $$p(x)$$. Now, starting from Figure 1a,
 we might intuitively hope that because the generated data points are highly concentrated in data space, $$F_\theta$$ will map them to a small range in representation space, as shown in the top panel of Figure 1a. This would then allow us to detect mode collapse, and hence provide a learning signal for $$\gamma$$, because the points in representation space do not appear to be drawn from a standard normal.
 
-However, if we wish to detect mode collapse, we must choose $$F_\theta$$ carefully. In this example, a poor choice of $$F_\theta$$ is shown in Figure 1b. Now applying $$F_\theta \circ G_\gamma$$ to the generator input returns samples that appear to be drawn from a standard normal, so $$F_\theta$$ is no help in detecting this example of mode collapse. To address this problem, we need an appropriate learning principle for $$\theta$$, which we introduce in the next section.
+However, if we wish to detect mode collapse, we must choose $$F_\theta$$ carefully. In this example, a poor choice of $$F_\theta$$ is shown in Figure 1b. Now applying $$F_\theta \circ G_\gamma$$ to the generator input returns samples that appear to be drawn from a standard normal, so $$F_\theta$$ is no help in detecting this example of mode collapse. To address this problem, we need an appropriate learning principle for $$\theta$$, which we introduce now as an algorithm.
+
+$$-\int p_0(z) \log p_\theta(z) \leq O(\gamma, \theta)$$
+
+$$O(\gamma, \theta) = KL{q_\gamma(x|z) p_0(z)}{p_\theta(z|x)p(x)} - E[\log p_0(z)] + E[d(z, F_\theta(x))]$$
+
+where all expectations are taken with respect to the joint distribution $$p_0(z) q_\gamma(x|z).$$ The second term does not depend on $$\gamma$$ or $$\theta$$, and is thus a constant, because $$p_0(z)$$ does neither depends on them nor on $$x$$. The function $$d$$ denotes a loss function in representation space $$R^K$$, such as $$l_2$$ loss. The third  term is then an autoencoder in representation space.
+
+TODO: finish this section.
+
+![algo](algo.png)
 
 # VEEGAN and VAE+GAN
 Unlike other adversarial methods that train reconstructor networks, the noise autoencoder dramatically reduces mode collapse. Unlike recent adversarial methods that also make use of a data autoencoder, VEEGAN autoencodes noise vectors rather than data items. This is a significant difference, because choosing an autoencoder loss for images is problematic, but for Gaussian noise vectors, an $$l_2$$ loss is entirely natural. Experimentally, on both synthetic and real-world image data sets, we find that VEEGAN is dramatically less susceptible to mode collapse, and produces higher-quality samples, than other state-of-the-art methods.
