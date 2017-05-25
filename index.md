@@ -13,7 +13,7 @@ Deep generative models that do not induce a density function that can be tractab
 More formally, let $$\{x_i\}_{i=1}^N$$ denote the training data, where each $$x_i \in \mathbb{R}^D$$ is drawn from an unknown
 distribution $$p(x)$$. A GAN is a neural network $$G_\gamma$$ that maps representation vectors $$z \in \mathbb{R}^K$$, typically drawn from a standard normal distribution, to data items $$x \in \mathbb{R}^D$$. Because this mapping defines an implicit probability distribution, training is accomplished by introducing a second neural network $$D_\omega$$, called a discriminator, whose goal is to distinguish samples from the generator to those from the data. The parameters of these networks are estimated by solving the minimax problem
 
-$$\max_\omega \min_\gamma \Ogan (\omega, \gamma) := \Expb{z}{\log \sigma \left(D_\omega(G_\gamma (z))\right)}  + \Expb{x {\log\left( 1-\sigma \left(D_\omega(x)\right)\right)}$$,
+$$\max_\omega \min_\gamma \mathcal{O}_{\text{gan}} (\omega, \gamma) := \Expb{z}{\log \sigma \left(D_\omega(G_\gamma (z))\right)}  + \Expb{x {\log\left( 1-\sigma \left(D_\omega(x)\right)\right)}$$,
 
 where $$E_z$$ indicates an expectation over the standard normal $$z$$, $$E_x$$ indicates an expectation over the empirical distribution, and $$\sigma$$ denotes the sigmoid function. At the optimum, in the limit of infinite data and arbitrarily powerful networks, we will have $$D_\omega = \log q_\gamma(x)/p(x)$$, where $$q_\gamma$$ is the density that is induced by running the network $$G_\gamma$$ on normally distributed input, and hence that $$q_\gamma = p$$.
 
