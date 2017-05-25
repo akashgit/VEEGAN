@@ -52,7 +52,7 @@
         ga('send', 'pageview');
       </script>
     {% endif %}
-    
+    </body>
     $("script[type='math/tex']").replaceWith(
       function(){
         var tex = $(this).text();
@@ -68,5 +68,5 @@
                katex.renderToString("\\displaystyle "+tex) +
                "</div>";
     });
-  </body>
+  
 </html>
