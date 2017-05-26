@@ -31,13 +31,24 @@ we might intuitively hope that because the generated data points are highly conc
 
 However, if we wish to detect mode collapse, we must choose $$F_\theta$$ carefully. In this example, a poor choice of $$F_\theta$$ is shown in Figure 1b. Now applying $$F_\theta \circ G_\gamma$$ to the generator input returns samples that appear to be drawn from a standard normal, so $$F_\theta$$ is no help in detecting this example of mode collapse. To address this problem, we need an appropriate learning principle for $$\theta$$, which we introduce now as an algorithm.
 
-$$-\int p_0(z) \log p_\theta(z) \leq O(\gamma, \theta)$$
+The proofs for the not-so-obvious inequalities are in the appendix of the paper. But essentially we start by establishing that,
 
+$$-\int p_0(z) \log p_\theta(z) \leq O(\gamma, \theta)$$
+where,
 $$O(\gamma, \theta) = KL{q_\gamma(x|z) p_0(z)}{p_\theta(z|x)p(x)} - E[\log p_0(z)] + E[d(z, F_\theta(x))]$$
 
-where all expectations are taken with respect to the joint distribution $$p_0(z) q_\gamma(x \mid z).$$ The second term does not depend on $$\gamma$$ or $$\theta$$, and is thus a constant, because $$p_0(z)$$ does neither depends on them nor on $$x$$. The function $$d$$ denotes a loss function in representation space $$R^K$$, such as $$l_2$$ loss. The third  term is then an autoencoder in representation space.
+Here all expectations are taken with respect to the joint distribution $$p_0(z) q_\gamma(x \mid z).$$ The second term does not depend on $$\gamma$$ or $$\theta$$, and is thus a constant, because $$p_0(z)$$ does neither depends on them nor on $$x$$. The function $$d$$ denotes a loss function in representation space $$R^K$$, such as $$l_2$$ loss. The third  term is then an autoencoder in representation space.
 
-TODO: finish this section.
+In this case, we cannot optimize $\calO$ directly, because the KL divergence depends on a density ratio which is unknown, both because $$q_\gamma$$ is implicit and also because $$p(x)$$ is unknown. We estimate this ratio using a discriminator network $$D_\omega(x,z)$$ which we will train to encourage, 
+
+$$D_{\omega}(z,x) = \log \frac{q_\gamma(x \mid z)p_0(z)}{p_{\theta}(z \mid x) p(x)}$$
+This allows us to estimate $$O$$ as,
+$$\hat{O} (\omega, \gamma, \theta) = \frac{1}{N} \sum_{i=1}^N D_\omega(z^i, x_g^i) + \frac{1}{N} \sum_{i=1}^N d(z^i, x_g^i)$$.
+
+We train the discriminator network using,
+$$O_{\text{LR}}(\omega, \gamma, \theta) = -E_\gamma[\log\left(\sigma \left(D_\omega(z,x)\right)\right)]- E_\theta[\log\left( 1-\sigma \left(D_\omega(z,x)\right)\right)]$$.
+
+Algorithm 1 below provides the exact procedural flow.
 
 ![algo](algo.png)
 
