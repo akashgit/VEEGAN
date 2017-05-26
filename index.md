@@ -58,21 +58,24 @@ Unlike other adversarial methods that train reconstructor networks, the noise au
 
 # Experiments
 ![results](tab.png) 
-We comapre VEEGAN to four competing methods of training GANs on a large number of synthetic and real image datasets. As shown in talbe 1 and 2, VEEGAN is able to consistently recover more modes than all the other methods. The follwoing sections provide details of the individual expertiments. 
+We comapre VEEGAN to three competing methods (GAN/DCGAN, ALI, Unrolled GAN) of training GANs on a large number of synthetic and real image datasets. As shown in talbe 1 and 2, VEEGAN is able to consistently recover more modes than all the other methods. The follwoing sections provide details of the individual expertiments. 
 ## Synthetic Dataset
 ![kde](2d_kde.png)
+Mode collapse can be accurately measured on synthetic datasets, since the true  distribution and its modes are known. In this section we compare all four competing methods on three synthetic datasets of increasing difficulty: a mixture of eight 2D Gaussian distributions arranged in a ring, a mixture of twenty-five 2D Gaussian distributions arranged in a grid and a mixture of ten 700 dimensional Gaussian distributions embedded in a 1200 dimensional space.  This mixture arrangement was chosen to mimic the higher dimensional manifolds of natural images.
 
+To quantify the mode collapsing behavior we report two metrics:  We sample points from the generator network, and count a sample as \emph{high quality}, if it is within three standard deviations of the nearest mode, for the 2D dataset, or within 10 standard deviations of the nearest mode, for the 1200D dataset.Then, we report the \emph{number of modes captured} as the number of mixture components whose mean is nearest to at least one high quality sample.
+We also report the percentage of high quality samples as a measure of sample quality. We generate $2500$ samples from each trained model and average the numbers over five runs. For the unrolled GAN, we set the number of unrolling steps to five as suggested in the authors' reference implementation.
 ## Stacked MNIST
 ![sm](veegan_sm.png)
-
+Stacked MNIST dataset, a variant of the MNIST data is specifically designed to increase the number of discrete modes.The data is synthesized by stacking three randomly sampled MNIST digits along the color channel resulting in a 28x28x3 image. We now expect $1000$ modes in this data set, corresponding to the number of possible triples of digits. As the true locations of the modes in this data are unknown, the number of modes are estimated using a trained classifier. We used a total of $26000$ samples for all the models and the results are averaged over five runs. As a measure of quality, we also report the KL divergence between the generator distribution and the data distribution.
 ## CIFAR
 ![cifar](cifar_paper.png)
-
+For CIFAR we use a metric introduced by Metz et al. (2017), which we will call the inference via optimization metric (IvOM). The idea behind this metric is to compare real images from the test set to the nearest generated image; if the generator suffers from mode collapse, then there will be some images for which this distance is large. To quantify this, we sample a real image $$x$$ from the test set, and find the closest image that the GAN is capable of generating, i.e.  optimizing the $$l_2$$ loss between $$x$$ and generated image $$G_\gamma(z)$$ with respect to $$z$$. If a method consistently attains low MSE, then it can be assumed to be capturing more modes than the ones which attain a higher MSE. We will also evaluate sample quality visually.
 ## CelebA
 ![faces](faces.png)
-
+We tried the CIFAR setup for VEEGAN on the celebA dataset without any further tuning and as shown in the figure above it managed to generate high quality faces. 
 ## Inference
 ![inf](inference_paper.png)
-
+While not the focus of this work, our method can also be used for inference as in the case of ALI and BiGAN models. Figure 4 shows an example of inference on MNIST. The top row samples are from the dataset. We extract the latent representation vector for each of the real images by running them through the trained reconstructor and then use the resulting vector in the generator to get the generated samples shown in the bottom row of the figure.
 # Acknowledgement
 We thank Martin Arjovsky, Nicolas Collignon, Luke Metz, Casper Kaae Sønderby, Lucas Theis, Soumith Chintala, Stanisław Jastrz˛ebski, Harrison Edwards and Amos Storkey for their helpful comments. We would like to specially thank Ferenc Huszár for insightful discussions and feedback.
