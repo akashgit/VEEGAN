@@ -58,6 +58,7 @@ Unlike other adversarial methods that train reconstructor networks, the noise au
 
 # Experiments
 ![results](tab.png) 
+We comapre VEEGAN to four competing methods of training GANs on a large number of synthetic and real image datasets. As shown in talbe 1 and 2, VEEGAN is able to consistently recover more modes than all the other methods. The follwoing sections provide details of the individual expertiments. 
 ## Synthetic Dataset
 ![kde](2d_kde.png)
 
