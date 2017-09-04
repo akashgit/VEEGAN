@@ -2,6 +2,8 @@
 layout: default
 title: VEEGAN
 ---
+
+
 UPDATE: __Accepted as a conference paper in NIPS 2017__
 
 ![rationale](main.png)
