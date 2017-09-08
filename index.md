@@ -4,7 +4,7 @@ title: VEEGAN
 ---
 
 
-UPDATE: __Accepted as a conference paper in NIPS 2017__
+In Advances in Neural Information Processing Systems (NIPS). 2017.
 
 ![rationale](main.png)
 
