@@ -3,9 +3,6 @@ layout: default
 title: VEEGAN
 ---
 
-
-In Advances in Neural Information Processing Systems (NIPS). 2017.
-
 ![rationale](main.png)
 
 # Learning In Implicit Models
