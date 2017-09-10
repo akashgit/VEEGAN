@@ -2,7 +2,6 @@
 layout: default
 title: VEEGAN
 ---
-
 ![rationale](main.png)
 
 # Learning In Implicit Models
