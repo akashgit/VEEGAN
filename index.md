@@ -2,6 +2,7 @@
 layout: default
 title: VEEGAN
 ---
+# Reconstructing The Latent Code Is Not Enough To Avoid Mode Collapsing
 ![rationale](main.png)
 
 # Learning In Implicit Models
