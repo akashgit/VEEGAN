@@ -3,7 +3,7 @@ layout: default
 title: VEEGAN
 ---
 # Reconstructing The Latent Code Is Not Enough To Avoid Mode Collapsing
-![rationale](main.png)
+![rationale](main_new.png)
 
 # Learning In Implicit Models
 Deep generative models that do not induce a density function that can be tractably computed, but rather provide a simulation procedure to generate new data points are called implicit statistical models. Generative adversarial networks (GANs) are an attractive such method, which have seen promising recent successes. GANs train two deep networks in concert: a generator network that maps random noise, usually drawn from a multi-variate Gaussian, to data items; and a discriminator network that estimates the likelihood ratio of the generator network to the data distribution, and is trained using an adversarial principle
