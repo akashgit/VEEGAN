@@ -37,7 +37,7 @@ Figure 1. In both columns of the figure, the middle
 vertical panel represents the data space, where in this example the
 true distribution $$p(x)$$ is a mixture of two Gaussians.  The bottom
 panel depicts the input to the generator, which is drawn from a
-standard normal distribution $$p_0= \mathcalN(0, I)$$,
+standard normal distribution $$p_0= \calN(0, I)$$,
 and the top panel depicts the result of applying
 the reconstructor network to the generated
 and the true data. The arrows labeled
