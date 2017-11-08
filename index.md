@@ -23,7 +23,18 @@ That is samples from $$q_\gamma(x)$$ capture only a few of the modes of $$p(x)$$
 
 # VEEGAN
 <div class="roundedBorder">
-To address this issue, we introduce VEEGAN, a variational principle for estimating implicit probability distributions that avoids mode collapse. While the generator network maps Gaussian random noise to data items, VEEGAN introduces an additional reconstructor network that maps the true data distribution to Gaussian random noise. We train the generator and reconstructor networks jointly by introducing a implicit variational principle, which involves a novel upper bound on the cross-entropy between the reconstructor network and the original noise distribution of the GAN. Our objective function combines the traditional discriminator with an autoencoder of the noise vectors — thus providing an additional, complementary learning signal that avoids mode collapse.
+To address this issue, we introduce VEEGAN, a variational principle for estimating
+implicit probability distributions that avoids mode collapse. While the generator network
+maps Gaussian random noise to data items, VEEGAN introduces an additional reconstructor network that
+maps the __true data distribution__ to Gaussian random noise.
+We train the generator and reconstructor networks jointly by
+introducing an implicit variational principle, 
+which encourages the reconstructor network
+not only to map the data distribution to a Gaussian, but also to approximately reverse
+the action of the generator.
+Intuitively, if the reconstructor learns
+both to map all of the true data to the noise distribution and is an approximate inverse of the generator network, this will encourage
+the generator network to map from the noise distribution to the entirety of the true data distribution, thus resolving mode collapse. 
 </div>
 
 The main idea of VEEGAN is to introduce a second network $$F_\theta$$
