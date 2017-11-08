@@ -41,7 +41,7 @@ standard normal distribution $$p_0= \mathcalN(0, I)$$,
 and the top panel depicts the result of applying
 the reconstructor network to the generated
 and the true data. The arrows labeled
- $G_\gamma$ show the action of the generator. The purple arrows labelled $$F_\theta$$ show the action of the reconstructor on the true data,
+ $$G_\gamma$$ show the action of the generator. The purple arrows labelled $$F_\theta$$ show the action of the reconstructor on the true data,
  whereas the green arrows show the action of the reconstructor on data from the generator. In this example, the
 generator has captured only one of the two modes of $$p(x)$$. The difference between Figure 1a and 1b is that the reconstructor networks
 are different.
