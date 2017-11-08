@@ -37,7 +37,7 @@ Figure 1. In both columns of the figure, the middle
 vertical panel represents the data space, where in this example the
 true distribution $$p(x)$$ is a mixture of two Gaussians.  The bottom
 panel depicts the input to the generator, which is drawn from a
-standard normal distribution $$p_0= \calN(0, I)$$,
+standard normal distribution $$p_0= N(0, I)$$,
 and the top panel depicts the result of applying
 the reconstructor network to the generated
 and the true data. The arrows labeled
@@ -82,7 +82,7 @@ $$F_\theta(x)$$.
 This  boils down to learning $$\gamma$$ and $$\theta$$ by
 minimising the sum of these two objectives, namely
 
-$$\mathcalO_{\mathrm{entropy}}(\gamma,\theta) = E\left[\| z - F_\theta(G_\gamma(z))\|_2^2\right] + H(Z, F_\theta(X))$$
+$$O_{\mathrm{entropy}}(\gamma,\theta) = E\left[\| z - F_\theta(G_\gamma(z))\|_2^2\right] + H(Z, F_\theta(X))$$
 
 While this objective captures the main idea of our paper, it cannot be
 easily computed and minimised. We next transform it into a
