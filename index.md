@@ -26,67 +26,67 @@ That is samples from $$q_\gamma(x)$$ capture only a few of the modes of $$p(x)$$
 To address this issue, we introduce VEEGAN, a variational principle for estimating implicit probability distributions that avoids mode collapse. While the generator network maps Gaussian random noise to data items, VEEGAN introduces an additional reconstructor network that maps the true data distribution to Gaussian random noise. We train the generator and reconstructor networks jointly by introducing a implicit variational principle, which involves a novel upper bound on the cross-entropy between the reconstructor network and the original noise distribution of the GAN. Our objective function combines the traditional discriminator with an autoencoder of the noise vectors — thus providing an additional, complementary learning signal that avoids mode collapse.
 </div>
 
-The main idea of \acronym is to introduce a second network $F_\theta$
-that we call the \emph{\reconstructor} which is learned  both to map the
-true data distribution $p(x)$ to a Gaussian and to approximately invert
+The main idea of VEEGAN is to introduce a second network $$F_\theta$$
+that we call the __reconstructor network__ which is learned  both to map the
+true data distribution $$p(x)$$ to a Gaussian and to approximately invert
 the generator network.
 
 To understand why this might
 prevent mode collapse, consider the example in
-\autoref{fig:cartoon_all}. In both columns of the figure, the middle
+Figure 1. In both columns of the figure, the middle
 vertical panel represents the data space, where in this example the
-true distribution $p(x)$ is a mixture of two Gaussians.  The bottom
+true distribution $$p(x)$$ is a mixture of two Gaussians.  The bottom
 panel depicts the input to the generator, which is drawn from a
-standard normal distribution $p_0= \calN(0, I)$,
+standard normal distribution $$p_0= \mathcalN(0, I)$$,
 and the top panel depicts the result of applying
 the reconstructor network to the generated
 and the true data. The arrows labeled
- $G_\gamma$ show the action of the generator. The purple arrows labelled $F_\theta$ show the action of the reconstructor on the true data,
+ $G_\gamma$ show the action of the generator. The purple arrows labelled $$F_\theta$$ show the action of the reconstructor on the true data,
  whereas the green arrows show the action of the reconstructor on data from the generator. In this example, the
-generator has captured only one of the two modes of $p(x)$. The difference between Figure \ref{fig:cartoon1} and \ref{fig:cartoon2} is that the reconstructor networks
+generator has captured only one of the two modes of $$p(x)$$. The difference between Figure 1a and 1b is that the reconstructor networks
 are different.
 
-First, let us suppose (Figure \ref{fig:cartoon1}) that we have successfully
-trained $F_\theta$ so that it is approximately
-the inverse of $G_\gamma$. As we have assumed mode collapse
-however, the training data for the reconstructor network $F_\theta$
-does not include data items from the forgotten" mode of $p(x),$ therefore
- the action of $F_\theta$ on data from that mode is
-ill-specified. This means that $F_\theta(X), X \sim p(x)$ is unlikely
+First, let us suppose (Figure 1a) that we have successfully
+trained $$F_\theta$$ so that it is approximately
+the inverse of $$G_\gamma$$. As we have assumed mode collapse
+however, the training data for the reconstructor network $$F_\theta$$
+does not include data items from the forgotten" mode of $$p(x),$$ therefore
+ the action of $$F_\theta$$ on data from that mode is
+ill-specified. This means that $$F_\theta(X), X \sim p(x)$$ is unlikely
 to be Gaussian and we can use this mismatch as an indicator of mode
 collapse.
 
-Conversely, let us suppose (Figure \ref{fig:cartoon2}) that $F_\theta$ is
+Conversely, let us suppose (Figure 1b) that $$F_\theta$$ is
 successful at mapping the true data distribution 
 to a Gaussian.  In that case, if
-$G_\gamma$ mode collapses, then $F_\theta$ will not map all $G_\gamma(z)$ back to the original $z$
+$$G_\gamma$$ mode collapses, then $$F_\theta$$ will not map all $$G_\gamma(z)$$ back to the original $$z$$
 and the resulting penalty provides us with a strong learning signal
-for both $\gamma$ and $\theta$. 
+for both $$\gamma$$ and $$\theta$$. 
 
-Therefore, the learning principle for \acronym
-will be to train $F_\theta$ to achieve
+Therefore, the learning principle for VEEGAN
+will be to train $$F_\theta$$ to achieve
 both of these objectives simultaneously. 
 Another way of stating this intuition is that
 if the same reconstructor network maps both
 the true data and the generated data to a Gaussian distribution, then the generated data
 is likely to coincide with true data.
-To measure whether $F_\theta$ approximately
-inverts $G_\gamma$, we use an autoencoder loss.
+To measure whether $$F_\theta$$ approximately
+inverts $$G_\gamma$$, we use an autoencoder loss.
  More precisely,  we 
-minimize a loss function, like $\ell_2$ loss between $z \sim p_0$ 
-and $F_\theta(G_\gamma(z)))$.
-To quantify whether $F_\theta$ maps
+minimize a loss function, like $$\ell_2$$ loss between $$z \sim p_0$$ 
+and $$F_\theta(G_\gamma(z)))$$.
+To quantify whether $$F_\theta$$ maps
 the true data distribution to a Gaussian,
-we use the cross entropy $H(Z, F_\theta(X))$ between $Z$ and
-$F_\theta(x)$.
-This  boils down to learning $\gamma$ and $\theta$ by
+we use the cross entropy $$H(Z, F_\theta(X))$$ between $$Z$$ and
+$$F_\theta(x)$$.
+This  boils down to learning $$\gamma$$ and $$\theta$$ by
 minimising the sum of these two objectives, namely
-\begin{equation}
-  \calO_{\mathrm{entropy}}(\gamma,\theta) = E\left[\| z - F_\theta(G_\gamma(z))\|_2^2\right] + H(Z, F_\theta(X)).\label{eq:intuition}
-\end{equation}
+
+$$\mathcalO_{\mathrm{entropy}}(\gamma,\theta) = E\left[\| z - F_\theta(G_\gamma(z))\|_2^2\right] + H(Z, F_\theta(X))$$
+
 While this objective captures the main idea of our paper, it cannot be
 easily computed and minimised. We next transform it into a
-computable version and derive theoretical guarantees.
+computable version below.
 
 The proofs for the not-so-obvious inequalities are in the appendix of the paper. But essentially we start by establishing that,
 
