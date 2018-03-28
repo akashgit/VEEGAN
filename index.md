@@ -2,6 +2,8 @@
 layout: default
 title: VEEGAN
 ---
+### Update: [@xukai92's](https://github.com/xukai92) Julia Implementation can be found [here](https://github.com/akashgit/VEEGAN/blob/master/veegan_julia_mnist.ipynb).
+
 # Reconstructing The Latent Code Is Not Enough To Avoid Mode Collapsing
 ![rationale](main_new.png)
 
